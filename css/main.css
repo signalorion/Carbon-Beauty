@@ -1,0 +1,309 @@
+@charset "utf-8";
+/*카본뷰티 메인스타일시트 - main.css*/
+
+@import url(core.css);
+@import url(reset.css);
+@import url(common.css);
+/*css 불러오기*/
+
+
+body{
+    padding-top: 240px;
+    /*상단공간밀기*/
+}
+/*1. 상단영역(header.top/100%*80) (임의의 높이계산)*/
+#top{
+    /*상단영역 최상위박스 고정하기*/
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background-color: transparent;
+    z-index: 9999;
+}
+/*상단영역 인박스*/
+#top .inbox{
+    position: relative;
+    /*부모자격*/
+    width: 95%;
+    /*확장시키기*/
+}
+.top{
+    /*속박스 개별 높이값*/
+    height: 82px;
+}
+/*1-1 중앙로고*/
+#logo{
+    position: relative;
+    top: 11px;
+    width: 60px;
+    height: 60px;
+    /*background-color: #000;*/
+    margin: 0 auto;
+}
+/*1-2 햄버거, 검색버튼 박스*/
+.btnGrp{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.btnGrp li:first-child{
+    /*햄버거버튼*/
+    width: 86px;
+    height: 82px;
+}
+/*햄버거아이콘*/
+.ham{
+    width: 20px;
+    height: 17px;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;/*밀려난게 들어오는 효과를 주기위해서*/
+}
+/*햄버거 막대 공통*/
+.ham span{
+    position: relative;
+    left: 0;
+    display: block; /*포지션릴레티브주면 자동블록 안됨. 앱솔은 됨!*/
+    width: 20px;
+    height: 3px;
+    background-color: #000;
+    /*트랜지션 속시이지*/
+    transition:left .4s ease-in-out;
+}
+/*햄버거버튼에 마우스오버시 위치이동 애니*/
+.ham:hover span{
+    left: 30px;
+}
+/*가상요소로 햄버거 막대 만들기*/
+.ham span::before{
+    content: "";
+    display: block;
+    width: 20px;
+    height: 3px;
+    margin-left: -30px;
+    background-color:#000;
+}
+.ham span:last-child::before{
+    content: "";
+    display: block;
+    width: 10px;
+    height: 3px;
+    margin-left: -30px;
+    background-color:#000;
+}
+/*햄버거 막대 셋팅*/
+.ham span:nth-child(1){
+    
+}
+.ham span:nth-child(2){
+    margin-top: 4px;
+}
+.ham span:nth-child(3){
+    margin-top: 4px;
+    width: 10px;
+/*얘만 속도가 다름. 지연시간주기*/
+    transition-delay: .1s;
+}
+.btnGrp li:last-child{
+    /*검색버튼*/
+    width: 48px;
+    height: 82px;
+}
+/*검색버튼 돋보기 박스*/
+.magni{
+    width: 19px;
+    height: 17px;
+    margin: 0 auto;
+    line-height: 82px;
+}
+
+/*1-3 장바구니, 문구 박스*/
+.rsGrp{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.rsGrp li:first-child{
+    /*문구*/
+    width: 300px;
+    height: 82px;
+    font-size: 0.7rem;
+    line-height: 82px;
+}
+/*앞문구*/
+.rsGrp li:first-child strong {
+    text-transform: uppercase; /*대문자변환*/
+    letter-spacing: 3px; /*자간변경*/
+}
+.rsGrp li:last-child{
+    /*장바구니*/
+    width: 90px;
+    height: 82px;
+}
+/*장바구니 아이콘박스*/
+.cart {
+    width:15px;
+    height:19px;
+    line-height: 82px;
+    margin-left: 30px;
+}
+
+/*2. 배너영역(section.ban/1200*500)*/
+#ban .inbox{
+    margin: 0;/*가운데오기해제*/
+    width: 80%;
+}
+.ban{
+    /*부모자격*/
+    position: relative;
+}
+/*메인배너이미지*/
+.ban img{
+    width: 100%;
+    /*height값은 자동*/
+}
+/*배너버튼*/
+.banbtn{
+    position: absolute;
+    top: 34%;
+    left: 13%;
+    /*가로크기는 유동적이다*/
+    width: 28%;
+    height: 90px;
+    background-color: #fff;
+    text-align: left;
+    padding-left: 15px;
+    border: 0;
+}
+
+/*마우스오버시 가상요소 배경 검정*/
+.banbtn::before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0%;
+    height: 100%;
+    background-color: #000;
+    top: 0;
+    transition: width .4s ease-in-out;
+}
+/*마우스오버시 js로 클래스줘서 배경가상요소 width채우기*/
+.banbtn.on::before{
+    left: 0;
+    width: 100%;
+}
+/*마우스아웃시 js로 클래스 주기! 배경가상요소 width없애기*/
+.banbtn.off::before{
+    right: 0;
+    width: 0%;
+}
+/*마우스오버시 글자색 흰 색*/
+.banbtn.on>*{
+    color: white;
+}
+
+
+.banbtn>*{
+    position: relative;
+    /*글씨를 위로 올리려구. 가상요소(배경검정)가 앱솔이므로
+    다른 스테틱요소들은 아래에 깔린다 따라서
+    겹칠 수 있는 포지션 중 그 자리 가만있는 렐러티브를 주기*/
+}
+
+/*버튼 안 폴스픽*/
+.banbtn strong{
+    font-size: 24px;
+}
+/*윗첨자*/
+.banbtn sup{
+    font-size: 12px;
+}
+/*아랫글자*/
+.banbtn span{
+    font-size: 10px;
+    display: block;
+}
+/*화살표*/
+.banbtn b{
+    /*인라인은 플롯 먹는다*/
+    float: right;
+    margin-top: -31px;
+    margin-right: 10px;
+}
+
+/*3. 상품리스트영역(section.glist/1200*2000)*/
+.glist{
+    /*높이값을 주지않고 auto인 상태로 셋팅하기 -> 알아서 밀어라*/
+    
+}
+/*상품 박스*/
+.gbx{
+    width: 1440px;
+    max-width: 100%;
+    /*가로크기보다 작아질 때 화면에 붙어라*/
+    display: flex;
+    /*자식요소를 옆으로 흐르게 플렉스적용하기*/
+    justify-content: space-around;
+}
+/*상품박스 트랙 ul*/
+.gbx ul{
+    flex-basis: 30%;
+    /*flex-basis는 width를 쓴거랑 같다*/
+}
+/*상품박스 개별 리스트 li*/
+.gbx li{
+    position: relative;
+    /*부모자격*/
+    float: none;
+    /*reset에 플롯left가 적용되어있음*/
+    background:#f4f2f4 url(../images/WEBSITE_Amethyst_Palette_400x560.jpg) no-repeat center/100%;
+    /*가로폭을 채우기*/
+    outline: 2px dotted blue;
+    margin:11% 0;
+}
+/*li에 비율박스 적용하기*/
+.gbx li::before{
+    content: "";
+    display: block;
+    padding-top: 150%;
+    /*박스높이를 패딩이 만들어준다*/
+}
+/*가상요소로 반투명 커버만들기*/
+.gbx li::after{
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.53);
+    transition: opacity .4s ease-out;
+    opacity: 0;
+}
+/*마우스오버시 커버보이기*/
+.gbx li:hover::after{
+    opacity: 1;
+}
+
+/*4. 상품소개영역(section.gdetail/1200*500) → 2개 영역*/
+.gdetail{
+    height: 1000px;
+}
+
+/*5. 블로그링크영역(section.blog/1200*400)*/
+.blog{
+    height: 700px;
+}
+
+/*6. 하단영역(footer.info/1200*600)*/
+.info{
+    height: 500px;
+}
+
+
+
+
